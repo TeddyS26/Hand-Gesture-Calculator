@@ -18,3 +18,5 @@ def preprocess_images(folder):
 # Preprocess images for all gestures
 for i in range(10):
     preprocess_images(f'gesture_{i}')
+
+print("Images preprocessed successfully.")
