@@ -1,36 +1,41 @@
 import cv2
 import os
 
-# Set up directories for each gesture (0-9)
-gesture_folders = [f'gesture_{i}' for i in range(10)]
-for folder in gesture_folders:
-    if not os.path.exists(folder):
-        os.makedirs(folder)
+def create_directory(directory):
+    if not os.path.exists(directory):
+        os.makedirs(directory)
 
-# Initialize the webcam
-cap = cv2.VideoCapture(0)
-print("Press 'q' to quit and 's' to save images")
+def capture_images(gesture, num_images=600):
+    # Create a directory for the gesture images (same as the original)
+    gesture_dir = f'gesture_{gesture}'
+    create_directory(gesture_dir)
+    
+    cap = cv2.VideoCapture(0)
+    count = 0
+    
+    while count < num_images:
+        ret, frame = cap.read()
+        if not ret:
+            print("Failed to capture image")
+            break
+        
+        # Display the frame
+        cv2.imshow('Capture Hand Gesture', frame)
+        
+        # Save the captured image (same save path structure as original)
+        img_path = os.path.join(gesture_dir, f'image_{count}.jpg')
+        cv2.imwrite(img_path, frame)
+        count += 1
+        
+        # Press 'q' to quit the capture early
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    
+    cap.release()
+    cv2.destroyAllWindows()
 
-# Specify which digit to capture (modify this for each run)
-current_gesture = 9 # Change this to capture images for different gestures
-
-image_count = 0
-while True:
-    # Capture frame-by-frame
-    ret, frame = cap.read()
-    cv2.imshow('frame', frame)
-
-    # Save the frame when 's' is pressed
-    if cv2.waitKey(1) & 0xFF == ord('s'):
-        image_path = f'gesture_{current_gesture}/image_{image_count}.jpg'
-        cv2.imwrite(image_path, frame)
-        print(f"Saved {image_path}")
-        image_count += 1
-
-    # Quit the capture when 'q' is pressed
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-
-# Release the webcam and close windows
-cap.release()
-cv2.destroyAllWindows()
+if __name__ == "__main__":
+    # Capture images for a specific gesture
+    current_gesture = 9  # Modify this for the gesture you're capturing
+    print(f"Capturing images for gesture {current_gesture}")
+    capture_images(gesture=current_gesture, num_images=600)

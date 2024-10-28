@@ -4,6 +4,7 @@ import os
 def preprocess_images(folder):
     for img_name in os.listdir(folder):
         img_path = os.path.join(folder, img_name)
+        print("Preprocessing", img_path)
         img = cv2.imread(img_path)
         
         # Convert to grayscale

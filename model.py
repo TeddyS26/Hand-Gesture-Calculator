@@ -27,8 +27,8 @@ data = np.array(data).reshape(-1, IMG_SIZE, IMG_SIZE, 1)
 data = data / 255.0
 labels = np.array(labels)
 
-# Split the data into training and testing sets (80% train, 20% test)
-X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.2, random_state=42)
+# Split the data into training and testing sets (90% train, 10% test)
+X_train, X_test, y_train, y_test = train_test_split(data, labels, test_size=0.1, random_state=42)
 
 # Step 2: Build the CNN Model
 model = Sequential()
