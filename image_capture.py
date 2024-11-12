@@ -5,15 +5,18 @@ def create_directory(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-def capture_images(gesture, num_images=600):
-    # Create a directory for the gesture images (same as the original)
+def capture_images(gesture, num_images=1000):
+    # Create a directory for the gesture images
     gesture_dir = f'gesture_{gesture}'
     create_directory(gesture_dir)
     
-    cap = cv2.VideoCapture(0)
-    count = 0
+    # Count existing images to start numbering from the next available number
+    existing_images = len(os.listdir(gesture_dir))
+    count = existing_images
     
-    while count < num_images:
+    cap = cv2.VideoCapture(0)
+    
+    while count < existing_images + num_images:
         ret, frame = cap.read()
         if not ret:
             print("Failed to capture image")
@@ -22,9 +25,10 @@ def capture_images(gesture, num_images=600):
         # Display the frame
         cv2.imshow('Capture Hand Gesture', frame)
         
-        # Save the captured image (same save path structure as original)
+        # Save the captured image with an incremented count
         img_path = os.path.join(gesture_dir, f'image_{count}.jpg')
         cv2.imwrite(img_path, frame)
+        print(f"Saved {img_path}")
         count += 1
         
         # Press 'q' to quit the capture early
@@ -36,6 +40,6 @@ def capture_images(gesture, num_images=600):
 
 if __name__ == "__main__":
     # Capture images for a specific gesture
-    current_gesture = 9  # Modify this for the gesture you're capturing
+    current_gesture = 9
     print(f"Capturing images for gesture {current_gesture}")
-    capture_images(gesture=current_gesture, num_images=600)
+    capture_images(gesture=current_gesture, num_images=1000)
