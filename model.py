@@ -1,6 +1,7 @@
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization, Input
+from tensorflow.keras.models import Sequential, Model
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout, BatchNormalization, Input, GlobalAveragePooling2D
+from tensorflow.keras.applications import MobileNetV2
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.callbacks import EarlyStopping, LearningRateScheduler
 from tensorflow.keras.regularizers import l2
@@ -44,35 +45,29 @@ def load_and_preprocess_data():
 X_train, X_test, y_train, y_test = load_and_preprocess_data()
 print("Data loaded and split into training and testing sets.")
 
-# Model Definition
+# Using a pre-trained MobileNetV2 model as the base for transfer learning
+base_model = MobileNetV2(weights='imagenet', include_top=False, input_shape=(IMG_SIZE, IMG_SIZE, 3))
+base_model.trainable = False  # Freeze the base model
+
+# Convert grayscale images to three channels by repeating the single channel
+X_train_rgb = np.repeat(X_train, 3, axis=-1)
+X_test_rgb = np.repeat(X_test, 3, axis=-1)
+
+# Build the full model
 model = Sequential([
-    Input(shape=(IMG_SIZE, IMG_SIZE, 1)),
-    Conv2D(32, (3, 3), activation='relu', kernel_regularizer=l2(0.01)),
-    BatchNormalization(),
-    MaxPooling2D(pool_size=(2, 2)),
-    Dropout(0.3),
-
-    Conv2D(64, (3, 3), activation='relu', kernel_regularizer=l2(0.01)),
-    BatchNormalization(),
-    MaxPooling2D(pool_size=(2, 2)),
-    Dropout(0.3),
-
-    Conv2D(128, (3, 3), activation='relu', kernel_regularizer=l2(0.01)),
-    BatchNormalization(),
-    MaxPooling2D(pool_size=(2, 2)),
-    Dropout(0.4),
-
-    Flatten(),
+    Input(shape=(IMG_SIZE, IMG_SIZE, 3)),
+    base_model,
+    GlobalAveragePooling2D(),
     Dense(128, activation='relu', kernel_regularizer=l2(0.01)),
     Dropout(0.5),
     Dense(10, activation='softmax')
 ])
 
-# Compile model with a lower learning rate
+# Compile the model with a lower learning rate for transfer learning
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=1e-5),
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
-print("Model built and compiled.")
+print("Transfer learning model built and compiled.")
 
 # Learning rate scheduler with minimum threshold
 def scheduler(epoch, lr):
@@ -88,16 +83,16 @@ early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_wei
 
 # Train the Model
 history = model.fit(
-    datagen.flow(X_train, y_train, batch_size=BATCH_SIZE),
+    datagen.flow(X_train_rgb, y_train, batch_size=BATCH_SIZE),
     epochs=EPOCHS,
-    validation_data=(X_test, y_test),
+    validation_data=(X_test_rgb, y_test),
     callbacks=[early_stopping, lr_scheduler]
 )
 
 # Save the Model
-model.save('hand_gesture_model.keras')
-print("Model trained and saved.")
+model.save('hand_gesture_model_transfer_learning.keras')
+print("Transfer learning model trained and saved.")
 
 # Evaluate the Model
-test_loss, test_acc = model.evaluate(X_test, y_test)
+test_loss, test_acc = model.evaluate(X_test_rgb, y_test)
 print(f'Test Accuracy: {test_acc}')
