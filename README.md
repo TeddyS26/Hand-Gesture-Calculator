@@ -75,3 +75,12 @@ python real_time_recognition.py
 ### Week 7:
 - UI Enhancement: Added on-screen buttons for arithmetic operations (+, -, *, /), allowing users to perform calculations with recognized gestures.
 - Operation Implementation: Enhanced the system to allow users to select operations via clickable buttons, and perform calculations using recognized hand gestures.
+
+### Week 8:
+- Process Rework: Reworked the process modeling by integrating the preprocessing and loading of images directly into model.py.
+
+### Week 9:
+- Data Collection (Part 2): Focused on improving model accuracy by collecting and adding more diverse images of hand gestures.
+
+### Week 10:
+- Model Optimization: Continued working on improving accuracy by implementing data augmentation, a learning rate scheduler, and other advanced techniques to enhance the model's training process.
