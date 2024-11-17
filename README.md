@@ -41,7 +41,7 @@ pip install -r requirements.txt
 ### Step 4: Run the Real-Time Gesture Recognition System
 To start the real-time gesture recognition system and perform arithmetic operations:
 ```
-python real_time_recognition.py
+python main.py
 ```
 
 ## Project Progress

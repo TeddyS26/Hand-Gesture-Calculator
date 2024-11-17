@@ -5,6 +5,13 @@ def create_directory(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
+def get_next_available_index(directory):
+    existing_files = [f for f in os.listdir(directory) if f.startswith("image_") and f.endswith(".jpg")]
+    if not existing_files:
+        return 0  # No files yet, start from 0
+    existing_indices = [int(f.split('_')[1].split('.')[0]) for f in existing_files]
+    return max(existing_indices) + 1  # Start from the next available index
+
 def capture_images(gesture, num_images=1000):
     # Create a directory for the gesture images
     gesture_dir = f'gesture_{gesture}'
@@ -12,7 +19,7 @@ def capture_images(gesture, num_images=1000):
     
     # Count existing images to start numbering from the next available number
     existing_images = len(os.listdir(gesture_dir))
-    count = existing_images
+    count = get_next_available_index(gesture_dir)
     
     cap = cv2.VideoCapture(0)
     
