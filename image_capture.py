@@ -8,11 +8,11 @@ def create_directory(directory):
 def get_next_available_index(directory):
     existing_files = [f for f in os.listdir(directory) if f.startswith("image_") and f.endswith(".jpg")]
     if not existing_files:
-        return 0  # No files yet, start from 0
+        return 0
     existing_indices = [int(f.split('_')[1].split('.')[0]) for f in existing_files]
-    return max(existing_indices) + 1  # Start from the next available index
+    return max(existing_indices) + 1
 
-def capture_images(gesture, num_images=1000):
+def capture_images(gesture, num_images):
     # Create a directory for the gesture images
     gesture_dir = f'gesture_{gesture}'
     create_directory(gesture_dir)
@@ -46,7 +46,7 @@ def capture_images(gesture, num_images=1000):
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    # Capture images for a specific gesture
-    current_gesture = 9
+    current_gesture = int(input("Enter the gesture number (0-9) to capture: "))
+    num_images = int(input("Enter the number of images to capture: "))
     print(f"Capturing images for gesture {current_gesture}")
-    capture_images(gesture=current_gesture, num_images=1000)
+    capture_images(current_gesture, num_images)
