@@ -10,7 +10,7 @@ hands = mp_hands.Hands(static_image_mode=True, max_num_hands=1, min_detection_co
 def extract_landmarks_from_images():
     landmark_data = {}
     for gesture in range(10):
-        gesture_dir = f'gesture_{gesture}'
+        gesture_dir = f'../Gestures/gesture_{gesture}'
         if not os.path.exists(gesture_dir):
             print(f"Directory {gesture_dir} does not exist. Skipping.")
             continue
@@ -42,7 +42,7 @@ def extract_landmarks_from_images():
         print(f"Extracted {len(landmarks)} landmarks for gesture {gesture}")
     
     # Save all landmarks to a pickle file
-    with open('gesture_landmarks.pkl', 'wb') as f:
+    with open('../Landmarks/gesture_landmarks.pkl', 'wb') as f:
         pickle.dump(landmark_data, f)
     print("All landmarks saved to gesture_landmarks.pkl")
 

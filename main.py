@@ -5,7 +5,7 @@ from tensorflow.keras.models import load_model # type: ignore
 import time
 
 # Load the trained model
-model = load_model('hand_gesture_model_mediapipe.keras')
+model = load_model('Models/hand_gesture_model_mediapipe.keras')
 
 # Initialize MediaPipe Hands
 mp_hands = mp.solutions.hands
@@ -25,7 +25,7 @@ button_clicked = False
 
 # Timers
 gesture_timer = None
-stage = "select_operation"  # Stages: select_operation, first_number, second_number, show_result
+stage = "select_operation"
 
 # Function to check if a point is inside a rectangle
 def is_inside(x, y, x1, y1, x2, y2):

@@ -70,7 +70,7 @@ history = model.fit(
 )
 
 # Save the model
-model.save('hand_gesture_model_mediapipe.keras')
+model.save('Models/hand_gesture_model_mediapipe.keras')
 print("Model trained and saved.")
 
 # Evaluate the model
