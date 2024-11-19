@@ -10,6 +10,16 @@ The Hand-Gesture Calculator is a real-time application that detects numerical ha
 - Basic Arithmetic Operations: Supports addition, subtraction, multiplication, and division, selected via on-screen buttons.
 - Real-Time Prediction: Uses a webcam to capture hand gestures and displays the result of the arithmetic operation.
 
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Features](#features)
+3. [How to Run the Project](#how-to-run-the-project)
+   - [Step 1: Clone the Repository](#step-1-clone-the-repository)
+   - [Step 2: Create and Activate a Virtual Environment](#step-2-create-and-activate-a-virtual-environment)
+   - [Step 3: Install Dependencies](#step-3-install-dependencies)
+   - [Step 4: Run the Real-Time Gesture Recognition System](#step-4-run-the-real-time-gesture-recognition-system)
+6. [Technical Details](#technical-details)
+7. [Future Improvements](#future-improvements)
 
 ## How to Run the Project
 
@@ -43,3 +53,19 @@ To start the real-time gesture recognition system and perform arithmetic operati
 ```
 python main.py
 ```
+
+## Technical Details
+
+- **Model Architecture**: The model is a feed-forward neural network that processes 63 3D hand landmarks (x, y, z) extracted by MediaPipe.
+- **Libraries Used**:
+  - **MediaPipe**: For detecting hand landmarks in images or webcam input.
+  - **TensorFlow/Keras**: For building and training the neural network.
+  - **PyQt5**: For creating a graphical user interface (GUI).
+  - **OpenCV**: For capturing real-time webcam feed and processing images.
+
+## Future Improvements
+
+1. **Accuracy Improvement**:
+   - Collect more diverse training data for gestures in different lighting and angles.
+2. **Support for More Gestures**:
+   - Extend the system to recognize additional hand gestures or complex sequences.
