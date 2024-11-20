@@ -8,11 +8,11 @@ import numpy as np
 
 EPOCHS = 50
 BATCH_SIZE = 32
-NUM_LANDMARKS = 63
+NUM_LANDMARKS = 126
 
 # Load landmark data
 def load_landmark_data():
-    with open('gesture_landmarks.pkl', 'rb') as f:
+    with open('./Landmarks/gesture_landmarks_v2.pkl', 'rb') as f:
         landmark_data = pickle.load(f)
     
     data = []
@@ -70,7 +70,7 @@ history = model.fit(
 )
 
 # Save the model
-model.save('Models/hand_gesture_model_mediapipe.keras')
+model.save('./Models/hand_gesture_model_mediapipe_v2.keras')
 print("Model trained and saved.")
 
 # Evaluate the model

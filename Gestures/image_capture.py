@@ -14,7 +14,7 @@ def get_next_available_index(directory):
 
 def capture_images(gesture, num_images):
     # Create a directory for the gesture images
-    gesture_dir = f'Gestures/gesture_{gesture}'
+    gesture_dir = f'./Gestures/gesture_{gesture}'
     create_directory(gesture_dir)
     
     # Count existing images to start numbering from the next available number
