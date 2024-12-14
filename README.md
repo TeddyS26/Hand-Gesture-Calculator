@@ -18,8 +18,8 @@ The Hand-Gesture Calculator is a real-time application that detects numerical ha
    - [Step 2: Create and Activate a Virtual Environment](#step-2-create-and-activate-a-virtual-environment)
    - [Step 3: Install Dependencies](#step-3-install-dependencies)
    - [Step 4: Run the Real-Time Gesture Recognition System](#step-4-run-the-real-time-gesture-recognition-system)
-6. [Technical Details](#technical-details)
-7. [Future Improvements](#future-improvements)
+4. [Technical Details](#technical-details)
+5. [Future Improvements](#future-improvements)
 
 ## How to Run the Project
 
