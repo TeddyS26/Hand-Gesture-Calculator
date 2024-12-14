@@ -30,38 +30,60 @@ git clone https://github.com/TeddyS26/Hand-Gesture-Calculator.git
 ```
 
 ### Step 2: Create and Activate a Virtual Environment
-Next you'll need to create a virtual enviorment:
+Next you'll need to create a virtual environment:
 
-1. Create a virtual environment:
-```
-python -m venv hand-gesture-calculator-env
-```
+#### 1. Create a Virtual Environment:
 
-2. Activate the virtual environment:
-```
-hand-gesture-calculator-env\Scripts\activate
-```
+- For Windows:
+   ```
+   python -m venv hand-gesture-calculator-env
+   ```
+
+- For Mac/Linux:
+   ```
+   python3 -m venv hand-gesture-calculator-env
+   ```
+
+#### 2. Activate the Virtual Environment:
+
+- For Windows:
+   ```
+   hand-gesture-calculator-env\Scripts\activate
+   ```
+
+- For Mac/Linux:
+   ```
+   source hand-gesture-calculator-env/bin/activate
+   ```
 
 ### Step 3: Install Dependencies
 Once the environment is active, install the necessary dependencies by running:
-```
-pip install -r requirements.txt
-```
+
+***Note: Python 3.7 or later is required to run the project.***
+   ```
+   pip install -r requirements.txt
+   ```
 
 ### Step 4: Run the Real-Time Gesture Recognition System
 To start the real-time gesture recognition system and perform arithmetic operations:
-```
-python main.py
-```
+- For Windows:
+   ```
+   python main.py
+   ```
+
+- For Mac/Linux:
+   ```
+   python3 main.py
+   ```
 
 ## Technical Details
 
-- **Model Architecture**: The model is a feed-forward neural network that processes 63 3D hand landmarks (x, y, z) extracted by MediaPipe.
+- **Model Architecture**: The model is a feed-forward neural network trained on 3D hand landmarks (x, y, z) extracted using MediaPipe.
 - **Libraries Used**:
-  - **MediaPipe**: For detecting hand landmarks in images or webcam input.
-  - **TensorFlow/Keras**: For building and training the neural network.
-  - **PyQt5**: For creating a graphical user interface (GUI).
-  - **OpenCV**: For capturing real-time webcam feed and processing images.
+  - **MediaPipe**: Detects and tracks 3D hand landmarks in real-time.
+  - **TensorFlow/Keras**: Builds, trains, and saves the neural network model for gesture recognition.
+  - **PyQt5**: Provides a user-friendly graphical interface for selecting operations and displaying results.
+  - **OpenCV**: Captures the webcam feed, processes video frames, and displays the live camera view.
 
 ## Future Improvements
 
