@@ -8,7 +8,7 @@ from PyQt5.QtGui import QImage, QPixmap
 from PyQt5.QtCore import QTimer, Qt
 
 # Load the trained model
-model = load_model('Models/hand_gesture_model_mediapipe_v2.keras')
+model = load_model('Models/hand_gesture_model_mediapipe_v3.keras')
 
 # Initialize MediaPipe Hands
 mp_hands = mp.solutions.hands

@@ -52,9 +52,9 @@ def extract_landmarks_from_images():
         print(f"Extracted {len(landmarks)} landmarks for gesture {gesture}")
     
     # Save all landmarks to a pickle file
-    with open('./Landmarks/gesture_landmarks_v2.pkl', 'wb') as f:
+    with open('./Landmarks/gesture_landmarks_v3.pkl', 'wb') as f:
         pickle.dump(landmark_data, f)
-    print("All landmarks saved to gesture_landmarks_v2.pkl")
+    print("All landmarks saved to gesture_landmarks_v3.pkl")
 
 if __name__ == "__main__":
     extract_landmarks_from_images()
