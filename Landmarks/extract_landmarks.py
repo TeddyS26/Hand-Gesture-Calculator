@@ -47,7 +47,7 @@ def extract_landmarks_from_images():
             if len(lm_combined) == 126:
                 landmarks.append(lm_combined)
         
-        # Save landmarks for this gesture
+        # Save landmarks for gesture
         landmark_data[gesture] = landmarks
         print(f"Extracted {len(landmarks)} landmarks for gesture {gesture}")
     

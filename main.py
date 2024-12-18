@@ -76,12 +76,14 @@ class HandGestureApp(QMainWindow):
         self.timer.timeout.connect(self.update_frame)
         self.timer.start(30)
 
+    # Function to select the operation
     def select_operation(self, operation):
         if self.stage == "select_operation":
             self.operation = operation
             self.stage = "first_number"
             self.gesture_timer = cv2.getTickCount()
 
+    # Function to clear all variables
     def clear_all(self):
         self.first_num = None
         self.second_num = None
@@ -90,6 +92,7 @@ class HandGestureApp(QMainWindow):
         self.stage = "select_operation"
         self.gesture_timer = None
 
+    # Function to update the camera feed
     def update_frame(self):
         ret, frame = self.cap.read()
         if not ret:
@@ -119,7 +122,7 @@ class HandGestureApp(QMainWindow):
             prediction = model.predict(landmarks)
             current_gesture = np.argmax(prediction)
 
-        # Manage stages
+        # Check the stage and elapsed time
         if self.stage == "first_number" and self.gesture_timer:
             elapsed_time = (cv2.getTickCount() - self.gesture_timer) / cv2.getTickFrequency()
             if elapsed_time >= 5:
@@ -156,6 +159,7 @@ class HandGestureApp(QMainWindow):
         pixmap = QPixmap.fromImage(qt_frame)
         self.camera_label.setPixmap(pixmap)
 
+    # Function to close the camera feed
     def closeEvent(self, event):
         self.cap.release()
         cv2.destroyAllWindows()

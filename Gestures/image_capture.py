@@ -29,7 +29,6 @@ def capture_images(gesture, num_images):
             print("Failed to capture image")
             break
         
-        # Display the frame
         cv2.imshow('Capture Hand Gesture', frame)
         
         # Save the captured image with an incremented count

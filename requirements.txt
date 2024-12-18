@@ -4,3 +4,4 @@ pyqt5==5.15.11
 mediapipe==0.10.18
 scikit-learn==1.5.2
 numpy>=1.21.2,<2.0.0
+h5py>=3.1.0

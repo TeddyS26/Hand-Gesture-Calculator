@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 import pickle
 import numpy as np
 
+# Constants
 EPOCHS = 50
 BATCH_SIZE = 32
 NUM_LANDMARKS = 126
