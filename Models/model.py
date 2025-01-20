@@ -3,6 +3,8 @@ from tensorflow.keras.models import Sequential # type: ignore
 from tensorflow.keras.layers import Dense, Dropout, BatchNormalization, Input # type: ignore
 from tensorflow.keras.callbacks import EarlyStopping, LearningRateScheduler # type: ignore
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+import matplotlib.pyplot as plt
 import pickle
 import numpy as np
 
@@ -77,3 +79,36 @@ print("Model trained and saved.")
 # Evaluate the model
 test_loss, test_acc = model.evaluate(X_test, y_test)
 print(f'Test Accuracy: {test_acc}')
+
+# Plot training and validation accuracy
+plt.figure(figsize=(10, 6))
+plt.plot(history.history['accuracy'], label='Training Accuracy')
+plt.plot(history.history['val_accuracy'], label='Validation Accuracy')
+plt.title('Training and Validation Accuracy')
+plt.xlabel('Epochs')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.grid()
+plt.savefig('./Plots/training_validation_accuracy.png')
+plt.show()
+
+# Plot training and validation loss
+plt.figure(figsize=(10, 6))
+plt.plot(history.history['loss'], label='Training Loss')
+plt.plot(history.history['val_loss'], label='Validation Loss')
+plt.title('Training and Validation Loss')
+plt.xlabel('Epochs')
+plt.ylabel('Loss')
+plt.legend()
+plt.grid()
+plt.savefig('./Plots/training_validation_loss.png')
+plt.show()
+
+# Confusion Matrix
+y_pred = np.argmax(model.predict(X_test), axis=1)
+conf_matrix = confusion_matrix(y_test, y_pred)
+disp = ConfusionMatrixDisplay(conf_matrix, display_labels=list(range(10)))
+disp.plot(cmap='Blues', xticks_rotation='vertical')
+plt.title('Confusion Matrix')
+plt.savefig('./Plots/confusion_matrix.png')
+plt.show()
